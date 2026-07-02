@@ -2295,6 +2295,14 @@
       "region": "AS",
       "account_type": "Bedrock",
       "verified_at": "2026-06-30T06:11:23.515547"
+    },
+    "1458445214858608703": {
+      "discord_id": "1458445214858608703",
+      "discord_name": "1nvincibl3e",
+      "minecraft_username": "1nvincibl3e",
+      "region": "AS",
+      "account_type": "Java",
+      "verified_at": "2026-07-02T13:08:59.887497"
     }
   },
   "waitlist": {
