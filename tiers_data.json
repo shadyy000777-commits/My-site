@@ -397,6 +397,13 @@
         "updated_at": "2026-06-30T07:21:23.365349",
         "updated_by": "chad__007"
       }
+    },
+    "<@999158007843782788>": {
+      "sword": {
+        "tier": "HT4",
+        "updated_at": "2026-07-02T12:45:40.886551",
+        "updated_by": "tosu_tofu"
+      }
     }
   },
   "tests": [
@@ -1950,15 +1957,15 @@
     },
     {
       "id": 130,
-      "username": "<@1494236355063054376>",
-      "tester_name": "SHADDY",
-      "gamemode": "MACE",
-      "tested_tier": "HT1",
+      "username": "<@999158007843782788>",
+      "tester_name": "TOUSIF666",
+      "gamemode": "sword",
+      "tested_tier": "HT4",
       "rank_before": "Unranked",
       "result": "passed",
       "notes": "",
-      "judged_by": "im_shaddy_777",
-      "tested_at": "2026-07-02T06:27:17.443634"
+      "judged_by": "tosu_tofu",
+      "tested_at": "2026-07-02T12:45:40.886551"
     }
   ],
   "profiles": {
@@ -2252,97 +2259,37 @@
       "region": "AS",
       "account_type": "Bedrock",
       "verified_at": "2026-06-30T06:11:23.515547"
-    },
-    "1410941948763836446": {
-      "discord_id": "1410941948763836446",
-      "discord_name": "proscholar28",
-      "minecraft_username": "Proscholar28",
-      "region": "AS",
-      "account_type": "Java",
-      "verified_at": "2026-07-02T09:07:47.640532"
-    },
-    "1167674011690471494": {
-      "discord_id": "1167674011690471494",
-      "discord_name": "shenron2_47404",
-      "minecraft_username": "author00o",
-      "region": "AS",
-      "account_type": "Java",
-      "verified_at": "2026-07-02T10:50:14.876817"
-    },
-    "1397295087985102919": {
-      "discord_id": "1397295087985102919",
-      "discord_name": "silentkiller09858",
-      "minecraft_username": "Better_Nexyy",
-      "region": "AS",
-      "account_type": "Java",
-      "verified_at": "2026-07-02T09:17:01.731634"
     }
   },
   "waitlist": {
-    "SMP": [
-      "1410941948763836446"
-    ],
+    "SMP": [],
     "Sword": [
-      "1494236355063054376",
-      "1410941948763836446"
+      "1494236355063054376"
     ],
-    "NethOP": [
-      "1410941948763836446",
-      "1167674011690471494"
-    ],
+    "NethOP": [],
     "Mace": [
-      "1410941948763836446"
+      "1368160511933288448"
     ],
-    "Axe": [
-      "1410941948763836446"
-    ],
-    "Pot": [
-      "1410941948763836446"
-    ],
-    "UHC": [
-      "1410941948763836446"
-    ],
+    "Axe": [],
+    "Pot": [],
+    "UHC": [],
     "Vanilla": [],
     "DIA SMP": [],
     "CART": [],
-    "Crystal": [
-      "1451607528084607169",
-      "1410941948763836446",
-      "1397295087985102919"
-    ]
+    "Crystal": []
   },
   "waitlist_channels": {
     "CART": {
       "channel_id": 1513489803478564914,
       "message_id": 1513489804652707971
     },
-    "Sword": {
-      "channel_id": 1522168008129118259,
-      "message_id": 1522168010326933525
-    },
-    "Crystal": {
-      "channel_id": 1522166915244625990,
-      "message_id": 1522166916997713982
-    },
-    "Axe": {
-      "channel_id": 1522168049392812095,
-      "message_id": 1522168051385110560
-    },
-    "NethOP": {
-      "channel_id": 1522168066329280552,
-      "message_id": 1522168068413980754
-    },
-    "UHC": {
-      "channel_id": 1522168082506977361,
-      "message_id": 1522168084377636865
-    },
-    "SMP": {
-      "channel_id": 1522168090417299589,
-      "message_id": 1522168092598206536
-    },
     "Mace": {
-      "channel_id": 1522168103532888149,
-      "message_id": 1522168105827045508
+      "channel_id": 1521397758819569764,
+      "message_id": 1521397760769785887
+    },
+    "Sword": {
+      "channel_id": 1522113419183001601,
+      "message_id": 1522113421179486290
     }
   },
   "waitlist_category_id": "1513162707614830612",
