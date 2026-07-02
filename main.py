@@ -5,29 +5,92 @@ import datetime
 import io
 import base64
 import asyncio
-import aiohttp
-import discord
-from discord import app_commands
-from discord.ext import commands
-from PIL import Image, ImageDraw, ImageFont
-from pilmoji import Pilmoji
-from config import (
-    TIERS, GAMEMODE_EMOJIS, GAMEMODE_ABBREV, REGION_COLORS,
-    CARD_BG, CARD_HEADER, CARD_ACCENT, CARD_CIRCLE_FILL, CARD_CIRCLE_BORDER_LT,
-    CARD_DIVIDER, CARD_TEXT_WHITE, CARD_TEXT_GREY, CARD_EMOJI_SIZE,
-    QUEUE_TIMEOUT_SECONDS, FONT_BOLD, FONT_REGULAR,
-    TIER_POINTS, OVERALL_RANKS,
-)
+import threading
 
 load_dotenv()
 
 TOKEN = os.getenv("DISCORD_TOKEN")
+
+# Bot-only imports — only needed when DISCORD_TOKEN is present.
+# On Railway (web-only), these are skipped so the Flask server can start cleanly.
+BOT_AVAILABLE = False
+if TOKEN:
+    try:
+        import aiohttp
+        import discord
+        from discord import app_commands
+        from discord.ext import commands
+        from PIL import Image, ImageDraw, ImageFont
+        from pilmoji import Pilmoji
+        from config import (
+            TIERS, GAMEMODE_EMOJIS, GAMEMODE_ABBREV, REGION_COLORS,
+            CARD_BG, CARD_HEADER, CARD_ACCENT, CARD_CIRCLE_FILL, CARD_CIRCLE_BORDER_LT,
+            CARD_DIVIDER, CARD_TEXT_WHITE, CARD_TEXT_GREY, CARD_EMOJI_SIZE,
+            QUEUE_TIMEOUT_SECONDS, FONT_BOLD, FONT_REGULAR,
+            TIER_POINTS, OVERALL_RANKS,
+        )
+        BOT_AVAILABLE = True
+    except Exception as _import_err:
+        print(f"⚠️  Bot imports failed ({_import_err}) — running in web-only mode.")
+else:
+    # Web-only: still import TIER_POINTS / OVERALL_RANKS for leaderboard if config exists
+    try:
+        from config import TIER_POINTS, OVERALL_RANKS, TIERS
+    except Exception:
+        TIER_POINTS = {}
+        OVERALL_RANKS = []
+        TIERS = []
 
 DATA_FILE = "tiers_data.json"
 
 GITHUB_OWNER = "shadyy000777-commits"
 GITHUB_REPO  = "My-site"
 GITHUB_FILE  = "tiers_data.json"
+
+# ── Stubs for web-only mode ──────────────────────────────────────────────────
+# When BOT_AVAILABLE is False (no DISCORD_TOKEN, e.g. Railway), all the
+# @bot.command / @bot.event decorators below still execute at import time.
+# These stubs absorb those calls silently so Flask can start without crashing.
+if not BOT_AVAILABLE:
+    class _Stub:
+        """Universal stub: any attribute access or call returns another stub."""
+        def __call__(self, *a, **kw):
+            return a[0] if a and callable(a[0]) else self
+        def __getattr__(self, name):
+            return _Stub()
+        def __or__(self, other): return self
+        def __ror__(self, other): return self
+        def run(self, *a, **kw): pass
+
+    discord      = _Stub()
+    commands     = _Stub()
+    app_commands = _Stub()
+    aiohttp      = _Stub()
+    Image = ImageDraw = ImageFont = _Stub()
+    Pilmoji      = _Stub()
+
+    # Config constants needed by bot functions
+    TIERS                = getattr(globals().get('TIERS'), '__iter__', lambda: [])() if 'TIERS' in dir() else []
+    GAMEMODE_EMOJIS      = {}
+    GAMEMODE_ABBREV      = {}
+    REGION_COLORS        = {}
+    CARD_BG              = (0, 0, 0)
+    CARD_HEADER          = (0, 0, 0)
+    CARD_ACCENT          = (0, 0, 0)
+    CARD_CIRCLE_FILL     = (0, 0, 0)
+    CARD_CIRCLE_BORDER_LT= (0, 0, 0)
+    CARD_DIVIDER         = (0, 0, 0)
+    CARD_TEXT_WHITE      = (255, 255, 255)
+    CARD_TEXT_GREY       = (128, 128, 128)
+    CARD_EMOJI_SIZE      = 28
+    QUEUE_TIMEOUT_SECONDS= 180
+    FONT_BOLD            = ""
+    FONT_REGULAR         = ""
+    if not TIER_POINTS:
+        TIER_POINTS      = {}
+    if not OVERALL_RANKS:
+        OVERALL_RANKS    = []
+# ─────────────────────────────────────────────────────────────────────────────
 
 async def _push_data_to_github():
     token = os.getenv("GITHUB_TOKEN")
