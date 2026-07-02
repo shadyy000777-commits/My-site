@@ -3658,9 +3658,8 @@ def run_bot():
     bot.run(TOKEN)
 
 if __name__ == "__main__":
-    if not TOKEN:
-        raise RuntimeError(
-            "DISCORD_TOKEN is not set. Add it to your Replit Secrets or .env file."
-        )
-    threading.Thread(target=run_bot, daemon=True).start()
+    if TOKEN:
+        threading.Thread(target=run_bot, daemon=True).start()
+    else:
+        print("⚠️  DISCORD_TOKEN not set — running in web-only mode (leaderboard still works).")
     run_web()
