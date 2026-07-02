@@ -3647,7 +3647,9 @@ def serve_tiers_data():
 
 def run_web():
     from waitress import serve
-    serve(web_app, host="0.0.0.0", port=5000, threads=8)
+    port = int(os.environ.get("PORT", 5000))
+    print(f"🌐 Starting web server on port {port}")
+    serve(web_app, host="0.0.0.0", port=port, threads=8)
 
 
 def run_bot():
