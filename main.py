@@ -2561,9 +2561,15 @@ LEADERBOARD_HTML = """<!DOCTYPE html>
 
     /* ── BOARD ── */
     .cards-wrap {
-      max-width: 460px; margin: 0 auto;
-      padding: 0 1.5rem 5rem;
-      display: flex; flex-direction: column; gap: 8px;
+      max-width: 920px; margin: 0 auto;
+      padding: 0 1rem 5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .cards-wrap.gm-mode { grid-template-columns: 1fr; }
+    @media (max-width: 700px) {
+      .cards-wrap { grid-template-columns: 1fr; padding: 0 0.75rem 5rem; }
     }
 
     /* ── OVERALL PLAYER CARD ── */
@@ -3149,7 +3155,7 @@ LEADERBOARD_HTML = """<!DOCTYPE html>
       const remaining = currentList.length - visibleCount;
       const btn = document.createElement('div');
       btn.id = 'load-more-btn';
-      btn.style.cssText = 'text-align:center;padding:1.5rem 1rem 2rem;';
+      btn.style.cssText = 'text-align:center;padding:1.5rem 1rem 2rem;grid-column:1/-1;';
       btn.innerHTML = `<button onclick="appendOverallPage()" style="background:var(--surface2);border:1px solid var(--border2);border-radius:999px;color:var(--text);font-family:var(--sans);font-size:13px;font-weight:600;padding:10px 28px;cursor:pointer;transition:border-color 0.15s;" onmouseover="this.style.borderColor='var(--violet-lt)'" onmouseout="this.style.borderColor='var(--border2)'">Load more <span style="color:var(--muted)">(${remaining} remaining)</span></button>`;
       board.parentElement.appendChild(btn);
     }
@@ -3183,6 +3189,7 @@ LEADERBOARD_HTML = """<!DOCTYPE html>
     currentTab = tab;
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     el.classList.add('active');
+    document.getElementById('board').classList.toggle('gm-mode', tab !== 'overall');
     renderCurrentView();
   }
 
