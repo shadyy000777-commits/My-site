@@ -448,8 +448,8 @@
     },
     "<@1491373546885349437>": {
       "sword": {
-        "tier": "HT1",
-        "updated_at": "2026-07-13T16:49:24.155796",
+        "tier": "HT2",
+        "updated_at": "2026-07-13T17:20:25.391036",
         "updated_by": "im_shaddy_777"
       }
     }
@@ -2506,6 +2506,18 @@
       "notes": "",
       "judged_by": "im_shaddy_777",
       "tested_at": "2026-07-13T16:49:24.155796"
+    },
+    {
+      "id": 172,
+      "username": "<@1491373546885349437>",
+      "tester_name": "sh",
+      "gamemode": "SWORD",
+      "tested_tier": "HT2",
+      "rank_before": "HT1",
+      "result": "passed",
+      "notes": "",
+      "judged_by": "im_shaddy_777",
+      "tested_at": "2026-07-13T17:20:25.391036"
     }
   ],
   "profiles": {
@@ -3147,7 +3159,8 @@
     "1495128184146886727": "ZimPlayzYt",
     "910803897751330826": "HatedGhost",
     "1496194344120750280": "RDX_DEV",
-    "1361665980601860238": "CARTXARMAN"
+    "1361665980601860238": "CARTXARMAN",
+    "1491373546885349437": "\ud835\udc7d\ud835\udc76\ud835\udc79\ud835\udc7b\ud835\udc6c\ud835\udc7f\ud835\udc7f"
   },
   "gamemode_roles": {
     "Sword": "1521360610195931277",
